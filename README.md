@@ -112,7 +112,7 @@ Slanger WebSocket server listening on port 8080
 ## Ubuntu upstart script
 
 If you're using Ubuntu, you might find this upscript very helpful. The steps below will create an init script that will make slanger run at boot and restart if it fails.
-Open `/etc/init/slanger` and add:
+Open `/etc/init/slanger.conf` and add:
 ```
 start on started networking and runlevel [2345]
 stop on runlevel [016]
@@ -121,6 +121,15 @@ script
     LANG=en_US.UTF-8 /usr/local/rvm/gems/ruby-RUBY_VERISON/wrappers/slanger --app_key KEY --secret SECRET --redis_address redis://REDIS_IP:REDIS_PORT/REDIS_DB
 end script
 ```
+Fill in the variables in the above script:
+
+RUBY_VERISON = The version of ruby you are using
+KEY = Your application key
+SECRET = Your applications secret key
+REDIS_IP = The IP address redis is running on
+REDIS_PORT = The port address redis is running on
+REDIS_DB = The database name your application will be using on your redis server
+
 This example assumes you're using rvm and a custom redis configuration
 
 Then, to start / stop the service, just do
